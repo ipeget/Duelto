@@ -1034,6 +1034,7 @@ GameObject:
   - component: {fileID: 3823195692619860245}
   - component: {fileID: 6213938848433869553}
   - component: {fileID: 834636639853906504}
+  - component: {fileID: 1888524801061439641}
   - component: {fileID: 6982812146204527121}
   - component: {fileID: 2093710903306137538}
   - component: {fileID: 2105664644914901595}
@@ -1141,6 +1142,54 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   TransitionStateInfoList: []
   m_Animator: {fileID: 6982812146204527121}
+--- !u!114 &1888524801061439641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416926081852918481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8f6dcb48ba52734793e10d5fd8da044, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  abilities:
+  - rid: 2768140904465432857
+  references:
+    version: 2
+    RefIds:
+    - rid: 2768140904465432857
+      type: {class: ProjectileAbility, ns: , asm: Assembly-CSharp}
+      data:
+        metadata:
+          icon: {fileID: 0}
+          name: Test
+          description: Sample
+          extendeDescription: Test
+        inputAction:
+          m_Name: Input
+          m_Type: 0
+          m_ExpectedControlType: 
+          m_Id: 7e08bb34-75e1-4deb-a823-e1a9d41e6d06
+          m_Processors: 
+          m_Interactions: 
+          m_SingletonActionBindings:
+          - m_Name: 
+            m_Id: c7ecc537-f3a6-4078-9652-a28745c4c415
+            m_Path: <Keyboard>/e
+            m_Interactions: 
+            m_Processors: 
+            m_Groups: 
+            m_Action: Input
+            m_Flags: 0
+          m_Flags: 0
+        animationClip: {fileID: 0}
+        audioClip: {fileID: 0}
+        cooldown: 0
+        priority: 0
+        prefab: {fileID: 8646606488117956106, guid: 67f9c3465136bc04fb9f8d2319ca9ad5, type: 3}
 --- !u!95 &6982812146204527121
 Animator:
   serializedVersion: 7
