@@ -15,4 +15,11 @@ public class PlayerAbility : NetworkBehaviour
                 ability.Initialize();
         }
     }
+
+    public override void OnDestroy()
+    {
+        base.OnDestroy();
+        foreach(var ability in abilities)
+            ability.OnDestroy();
+    }
 }

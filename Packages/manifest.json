@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.gitamend.improvedtimers": "https://github.com/adammyhre/Unity-Improved-Timers.git",
     "com.mackysoft.serializereference-extensions": "https://github.com/mackysoft/Unity-SerializeReferenceExtensions.git?path=Assets/MackySoft/MackySoft.SerializeReferenceExtensions",
     "com.unity.ai.navigation": "2.0.4",
     "com.unity.burst": "1.8.18",

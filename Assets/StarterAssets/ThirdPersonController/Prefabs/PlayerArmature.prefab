@@ -1035,6 +1035,7 @@ GameObject:
   - component: {fileID: 6213938848433869553}
   - component: {fileID: 834636639853906504}
   - component: {fileID: 1888524801061439641}
+  - component: {fileID: 7354072171760676805}
   - component: {fileID: 6982812146204527121}
   - component: {fileID: 2093710903306137538}
   - component: {fileID: 2105664644914901595}
@@ -1187,9 +1188,26 @@ MonoBehaviour:
           m_Flags: 0
         animationClip: {fileID: 0}
         audioClip: {fileID: 0}
-        cooldown: 0
+        cooldown: 5
         priority: 0
         prefab: {fileID: 8646606488117956106, guid: 67f9c3465136bc04fb9f8d2319ca9ad5, type: 3}
+--- !u!114 &7354072171760676805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416926081852918481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759958ebc94097349b2f3ab8df9c0682, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  health:
+    m_InternalValue: 3000
+  gfenergy:
+    m_InternalValue: 1000
 --- !u!95 &6982812146204527121
 Animator:
   serializedVersion: 7

@@ -1,3 +1,4 @@
+using ImprovedTimers;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,16 +18,20 @@ public abstract class Ability
     [Space]
     [SerializeField] private int priority;
 
+    protected Timer cooldownTimer;
+    
     public abstract void Execute();
 
     public virtual void Initialize() 
     {
+        cooldownTimer = new CountdownTimer(cooldown);
         inputAction.performed += _ => Execute();
         OnEnable();
     }
 
     public virtual void OnEnable() => inputAction.Enable();
     public virtual void OnDisable() => inputAction.Disable();
+    public virtual void OnDestroy() => cooldownTimer.Dispose();
 }
 
 [Serializable]
@@ -38,8 +43,13 @@ public class ProjectileAbility : Ability, INetworkAbilityWithInstantiate
     public override void Execute()
     {
         int id = AbilityRequestReceiver.instance.GetAbilityId(this);
-        if(id != -1)
-            AbilityRequestReceiver.instance.RequestInstantiateRpc(id);
+
+        if(id == -1) return;
+
+        if (cooldownTimer.IsRunning) return;
+
+        AbilityRequestReceiver.instance.RequestInstantiateRpc(id);
+        cooldownTimer.Start();
     }
 }
 
