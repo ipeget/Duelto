@@ -15,12 +15,6 @@ public class PlayerParametrs : NetworkBehaviour, IDamageable
         health.OnValueChanged -= OnValueChanged;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-            TakeDamage(10);
-    }
-
     private void OnValueChanged(int previous, int current)
     {
         Debug.Log($"Value changed from {previous} to {current}");

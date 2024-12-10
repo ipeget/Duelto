@@ -5,18 +5,21 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [Serializable]
-public abstract class Ability
+public abstract class Ability : IAbilityPredicates
 {
     [SerializeField] private Metadata metadata;
     [Space]
-    [SerializeField] private InputAction inputAction;
+    public InputAction inputAction;
     [SerializeField] private AnimationClip animationClip;
     [SerializeField] private AudioClip audioClip;
+
     [Space]
-    public List<Func<bool>> Predicates;
+    private List<Func<bool>> predicates;
+    public List<Func<bool>> Predicates => predicates;
     [SerializeField] private float cooldown;
     [Space]
     [SerializeField] private int priority;
+    public int Id => GetHashCode();
 
     protected Timer cooldownTimer;
     
@@ -25,13 +28,17 @@ public abstract class Ability
     public virtual void Initialize() 
     {
         cooldownTimer = new CountdownTimer(cooldown);
-        inputAction.performed += _ => Execute();
         OnEnable();
     }
 
     public virtual void OnEnable() => inputAction.Enable();
     public virtual void OnDisable() => inputAction.Disable();
     public virtual void OnDestroy() => cooldownTimer.Dispose();
+
+    public override int GetHashCode()
+    {
+        return metadata.Name.GetHashCode();
+    }
 }
 
 [Serializable]
@@ -56,4 +63,11 @@ public class ProjectileAbility : Ability, INetworkAbilityWithInstantiate
 public interface INetworkAbilityWithInstantiate
 {
     GameObject Prefab { get; }
+}
+
+public interface IAbilityPredicates
+{
+    List<Func<bool>> Predicates { get; }
+
+    int Id { get; }
 }

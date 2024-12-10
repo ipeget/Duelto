@@ -1156,41 +1156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  abilities:
-  - rid: 2768140904465432857
-  references:
-    version: 2
-    RefIds:
-    - rid: 2768140904465432857
-      type: {class: ProjectileAbility, ns: , asm: Assembly-CSharp}
-      data:
-        metadata:
-          icon: {fileID: 0}
-          name: Test
-          description: Sample
-          extendeDescription: Test
-        inputAction:
-          m_Name: Input
-          m_Type: 0
-          m_ExpectedControlType: 
-          m_Id: 7e08bb34-75e1-4deb-a823-e1a9d41e6d06
-          m_Processors: 
-          m_Interactions: 
-          m_SingletonActionBindings:
-          - m_Name: 
-            m_Id: c7ecc537-f3a6-4078-9652-a28745c4c415
-            m_Path: <Keyboard>/e
-            m_Interactions: 
-            m_Processors: 
-            m_Groups: 
-            m_Action: Input
-            m_Flags: 0
-          m_Flags: 0
-        animationClip: {fileID: 0}
-        audioClip: {fileID: 0}
-        cooldown: 5
-        priority: 0
-        prefab: {fileID: 8646606488117956106, guid: 67f9c3465136bc04fb9f8d2319ca9ad5, type: 3}
+  playerAbilityConfig: {fileID: 11400000, guid: 3dddd59e1ae64fb4ba13c0ea055cee81, type: 2}
 --- !u!114 &7354072171760676805
 MonoBehaviour:
   m_ObjectHideFlags: 0

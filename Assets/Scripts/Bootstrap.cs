@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bootstrap : MonoBehaviour
 {
+    [SerializeField] private AbilityRequestReceiver abilityRequestReceiver;
     [SerializeField] private CinemachineCamera ccam;
 
     private void Start()
@@ -21,6 +22,19 @@ public class Bootstrap : MonoBehaviour
         {
             ccam.Target.TrackingTarget = connected.transform.Find("PlayerCameraRoot");
             //connected.GetComponent<ClientConnection>()?.Initialize();
+        }
+
+        if (NetworkManager.Singleton.IsHost)
+        {
+            PlayerAbility playerAbility = connected.GetComponent<PlayerAbility>();
+            if (playerAbility != null)
+            {
+                abilityRequestReceiver.AddClientAbilityPredicates(id, playerAbility.playerAbilityConfig.GetAbilityPredicates());
+            }
+            else
+            {
+                throw new MissingComponentException("Player object does not have PlayerAbility");
+            }
         }
     }
 }
