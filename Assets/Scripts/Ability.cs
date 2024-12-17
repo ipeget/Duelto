@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [Serializable]
-public abstract class Ability : IAbilityPredicates
+public abstract class Ability : IAbility
 {
     [SerializeField] private Metadata metadata;
     [Space]
@@ -14,31 +14,28 @@ public abstract class Ability : IAbilityPredicates
     [SerializeField] private AudioClip audioClip;
 
     [Space]
-    private List<Func<bool>> predicates;
+    protected List<Func<bool>> predicates;
     public List<Func<bool>> Predicates => predicates;
     [SerializeField] private float cooldown;
     [Space]
     [SerializeField] private int priority;
     public int Id => GetHashCode();
 
-    protected Timer cooldownTimer;
-    
+    public Timer CooldownTimer { get; private set; }
+
     public abstract void Execute();
 
-    public virtual void Initialize() 
+    public virtual void Initialize()
     {
-        cooldownTimer = new CountdownTimer(cooldown);
+        CooldownTimer = new CountdownTimer(cooldown);
+        predicates = new List<Func<bool>>() { () => !CooldownTimer.IsRunning };
         OnEnable();
     }
 
     public virtual void OnEnable() => inputAction.Enable();
     public virtual void OnDisable() => inputAction.Disable();
-    public virtual void OnDestroy() => cooldownTimer.Dispose();
-
-    public override int GetHashCode()
-    {
-        return metadata.Name.GetHashCode();
-    }
+    public virtual void OnDestroy() => CooldownTimer.Dispose();
+    public override int GetHashCode() => metadata.Name.GetHashCode();
 }
 
 [Serializable]
@@ -50,13 +47,7 @@ public class ProjectileAbility : Ability, INetworkAbilityWithInstantiate
     public override void Execute()
     {
         int id = AbilityRequestReceiver.instance.GetAbilityId(this);
-
-        if(id == -1) return;
-
-        if (cooldownTimer.IsRunning) return;
-
         AbilityRequestReceiver.instance.RequestInstantiateRpc(id);
-        cooldownTimer.Start();
     }
 }
 
@@ -65,9 +56,10 @@ public interface INetworkAbilityWithInstantiate
     GameObject Prefab { get; }
 }
 
-public interface IAbilityPredicates
+public interface IAbility
 {
     List<Func<bool>> Predicates { get; }
-
+    Timer CooldownTimer { get; }
+    void Execute();
     int Id { get; }
 }

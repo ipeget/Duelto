@@ -8,9 +8,9 @@ public class PlayerAbilityConfig : ScriptableObject
     [SerializeReference, SubclassSelector] private List<Ability> abilities = new List<Ability>();
     public List<Ability> GetAbilities() { return new List<Ability>(abilities); } 
 
-    public List<IAbilityPredicates> GetAbilityPredicates()
+    public List<IAbility> GetAbilityPredicates()
     {
-        List<IAbilityPredicates> list = new List<IAbilityPredicates>();
+        List<IAbility> list = new List<IAbility>();
         foreach (var ability in abilities)
             list.Add(ability);
 

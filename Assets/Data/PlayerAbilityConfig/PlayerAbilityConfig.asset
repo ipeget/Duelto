@@ -12,3 +12,69 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7906b9e936dcbd546ae9fd9198757efe, type: 3}
   m_Name: PlayerAbilityConfig
   m_EditorClassIdentifier: 
+  abilities:
+  - rid: 4277314884158881880
+  - rid: 4277315041400193112
+  references:
+    version: 2
+    RefIds:
+    - rid: 4277314884158881880
+      type: {class: ProjectileAbility, ns: , asm: Assembly-CSharp}
+      data:
+        metadata:
+          icon: {fileID: 0}
+          name: Test
+          description: Sample
+          extendeDescription: Test
+        inputAction:
+          m_Name: Input
+          m_Type: 0
+          m_ExpectedControlType: 
+          m_Id: 7e08bb34-75e1-4deb-a823-e1a9d41e6d06
+          m_Processors: 
+          m_Interactions: 
+          m_SingletonActionBindings:
+          - m_Name: 
+            m_Id: c7ecc537-f3a6-4078-9652-a28745c4c415
+            m_Path: <Keyboard>/e
+            m_Interactions: 
+            m_Processors: 
+            m_Groups: 
+            m_Action: Input
+            m_Flags: 0
+          m_Flags: 0
+        animationClip: {fileID: 0}
+        audioClip: {fileID: 0}
+        cooldown: 5
+        priority: 0
+        prefab: {fileID: 8646606488117956106, guid: 67f9c3465136bc04fb9f8d2319ca9ad5, type: 3}
+    - rid: 4277315041400193112
+      type: {class: ProjectileAbility, ns: , asm: Assembly-CSharp}
+      data:
+        metadata:
+          icon: {fileID: 0}
+          name: 
+          description: 
+          extendeDescription: 
+        inputAction:
+          m_Name: Input
+          m_Type: 0
+          m_ExpectedControlType: 
+          m_Id: 6eeaee9c-591f-4014-8d8c-8544df702abd
+          m_Processors: 
+          m_Interactions: 
+          m_SingletonActionBindings:
+          - m_Name: 
+            m_Id: 8b1b6b31-09bb-4c0c-b8eb-25b0bef0ba53
+            m_Path: <Keyboard>/q
+            m_Interactions: 
+            m_Processors: 
+            m_Groups: 
+            m_Action: Input
+            m_Flags: 0
+          m_Flags: 0
+        animationClip: {fileID: 0}
+        audioClip: {fileID: 0}
+        cooldown: 5
+        priority: 0
+        prefab: {fileID: 8646606488117956106, guid: 7be3cc69517c845408a4a5fb1c2fbd7c, type: 3}

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bootstrap : MonoBehaviour
 {
     [SerializeField] private AbilityRequestReceiver abilityRequestReceiver;
+    [SerializeField] private TimerHandler timerHandler;
     [SerializeField] private CinemachineCamera ccam;
 
     private void Start()
@@ -24,17 +25,12 @@ public class Bootstrap : MonoBehaviour
             //connected.GetComponent<ClientConnection>()?.Initialize();
         }
 
-        if (NetworkManager.Singleton.IsHost)
+        if (connected.TryGetComponent<PlayerAbility>(out var playerAbility))
         {
-            PlayerAbility playerAbility = connected.GetComponent<PlayerAbility>();
-            if (playerAbility != null)
-            {
-                abilityRequestReceiver.AddClientAbilityPredicates(id, playerAbility.playerAbilityConfig.GetAbilityPredicates());
-            }
-            else
-            {
-                throw new MissingComponentException("Player object does not have PlayerAbility");
-            }
+            playerAbility.Initialize();
         }
+        else throw new MissingComponentException("Player object does not have PlayerAbility");
+
+        timerHandler.Initialize();
     }
 }

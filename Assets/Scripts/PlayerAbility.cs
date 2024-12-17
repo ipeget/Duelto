@@ -1,36 +1,53 @@
 using System.Collections.Generic;
 using Unity.Netcode;
+using ImprovedTimers;
 using UnityEngine;
 
-public class PlayerAbility : NetworkBehaviour
+public class PlayerAbility : NetworkBehaviour, IUsingTimer
 {
-    public PlayerAbilityConfig playerAbilityConfig;
+    [SerializeField] private PlayerAbilityConfig playerAbilityConfig;
     private List<Ability> abilities;
-    private void Start()
+    public IEnumerable<Ability> Abilities => abilities;
+
+    public void Initialize()
     {
+        abilities = playerAbilityConfig.GetAbilities();
+
         if (IsOwner)
         {
-            abilities = playerAbilityConfig.GetAbilities();
-
-            Debug.Log("PlayerAbility Initialize");
             foreach (var ability in abilities)
             {
                 ability.Initialize();
                 ability.inputAction.performed += _ => TryExecuteAbilityRPC(ability.Id);
             }
         }
+
+        AbilityRequestReceiver.instance.AddClientAbilityPredicates(OwnerClientId, playerAbilityConfig.GetAbilityPredicates());
     }
 
     [Rpc(SendTo.Server)]
     public void TryExecuteAbilityRPC(int id)
     {
-        AbilityRequestReceiver.instance.CheckPredicates(NetworkObjectId, id);
+        AbilityRequestReceiver.instance.TryExecuteAbility(OwnerClientId, id);
+    }
+
+    public void Use(Timer timer) // ??? Завтра доделать обязательно, а то у меня уже плывет мозг
+    {
+        Timer sameTimer = abilities.Find(x => x.CooldownTimer == timer).CooldownTimer;
     }
 
     public override void OnDestroy()
     {
         base.OnDestroy();
-        foreach(var ability in abilities)
+
+        if (abilities == null) return;
+        foreach (var ability in abilities)
             ability.OnDestroy();
     }
+}
+
+
+public interface IUsingTimer
+{
+    void Use(Timer timer);
 }
