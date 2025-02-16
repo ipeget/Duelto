@@ -46,21 +46,26 @@ public class TimerHandler : NetworkBehaviour
         }
     }
 
+    public Timer CreateTimer(ulong clientIdm, float time)
+    {
+        Timer timer = new CountdownTimer(time);
+        RegisterTimer(clientIdm, timer);
+        return timer;
+    }
 
     public void RegisterTimer(ulong clientId, Timer timer)
     {
         ClientTimer clientTimer = new ClientTimer(clientId, timer);
         timers.Add(clientTimer);
-        if (IsServer) clientTimer.timer.OnTimerStop += () => OnTimerEnded(clientTimer);
     }
 
     public void StartTimer(ulong clientId, Timer timer)
     {
+        if(!IsServer) return;
+
         ClientTimer cashedClientTimer = timers.Find(x => x.timerHashCode == timer.GetHashCode() && x.clientId == clientId);
         if (cashedClientTimer == null)
-        {
             Debug.LogError("The requested timer is not registered");
-        }
 
         if (cashedClientTimer.timer.IsFinished)
             cashedClientTimer.timer.Start();
@@ -68,39 +73,8 @@ public class TimerHandler : NetworkBehaviour
             Debug.LogError("Attempt to start a running timer");
     }
 
-    private void OnTimerEnded(ClientTimer clientTimer)
-    {
-        if (IsServer)
-        {
-            ClientRpcParams clientRpcParams = new ClientRpcParams
-            {
-                Send = new ClientRpcSendParams
-                {
-                    TargetClientIds = new ulong[] { clientTimer.clientId }
-                }
-            };
-
-            TimerEndClientRPC(clientTimer.timerHashCode, clientRpcParams);
-        }
-
-    }
-
-    [ClientRpc]
-    public void TimerEndClientRPC(int timerHashCode, ClientRpcParams rpcParams = default)
-    {
-        if (IsOwner) return;
-
-        //ClientTimer clientTimer = timers.First(x => x.timerHashCode == timerHashCode);
-        //if (clientTimer != null)
-        //{
-        //    clientTimer.usingTimer.Use(clientTimer.timer);
-        //}
-        //else Debug.LogError("Attempting to terminate a timer that does not exist!");
-    }
-
     private class ClientTimer
     {
-        public IUsingTimer usingTimer { get; private set; }
         public ulong clientId { get; private set; }
         public int timerHashCode { get; private set; }
         public Timer timer { get; private set; }
@@ -110,8 +84,6 @@ public class TimerHandler : NetworkBehaviour
             this.clientId = clientId;
             this.timer = timer;
             timerHashCode = timer.GetHashCode();
-
-            usingTimer = NetworkManager.Singleton.SpawnManager.GetPlayerNetworkObject(clientId).GetComponent<IUsingTimer>();
         }
     }
 }

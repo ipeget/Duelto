@@ -737,6 +737,7 @@ MonoBehaviour:
   abilityRequestReceiver: {fileID: 1723405634}
   timerHandler: {fileID: 1723405635}
   ccam: {fileID: 156928162}
+  targetingHandler: {fileID: 1723405636}
 --- !u!4 &391083057
 Transform:
   m_ObjectHideFlags: 0
@@ -1232,6 +1233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71eb685847e98d488baf3a3475d5ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  createLobbyButton: {fileID: 0}
   startHostButton: {fileID: 594768450}
   startClientButton: {fileID: 1369523471}
   buttonsPlane: {fileID: 2053797036}
@@ -1611,6 +1613,7 @@ GameObject:
   - component: {fileID: 1723405633}
   - component: {fileID: 1723405634}
   - component: {fileID: 1723405635}
+  - component: {fileID: 1723405636}
   m_Layer: 0
   m_Name: RequestHandler
   m_TagString: Untagged
@@ -1685,6 +1688,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+--- !u!114 &1723405636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723405631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a065b47923d10064a91d556c41bdc703, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1769761584
 GameObject:
   m_ObjectHideFlags: 0

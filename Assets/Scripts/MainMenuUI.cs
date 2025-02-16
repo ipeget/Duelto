@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class MainMenuUI : MonoBehaviour
 {
+    [SerializeField] private Button createLobbyButton;
     [SerializeField] private Button startHostButton;
     [SerializeField] private Button startClientButton;
     [SerializeField] private GameObject buttonsPlane;
@@ -16,6 +17,7 @@ public class MainMenuUI : MonoBehaviour
         startClientButton.onClick.AddListener(StartClient);
         startClientButton.onClick.AddListener(() => buttonsPlane.SetActive(false));
     }
+
 
     private void StartHost() => NetworkManager.Singleton.StartHost();
     private void StartClient() => NetworkManager.Singleton.StartClient();

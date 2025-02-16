@@ -38,22 +38,15 @@ public abstract class Ability : IAbility
     public override int GetHashCode() => metadata.Name.GetHashCode();
 }
 
-[Serializable]
-public class ProjectileAbility : Ability, INetworkAbilityWithInstantiate
-{
-    [SerializeField] private GameObject prefab;
-    public GameObject Prefab => prefab;
-
-    public override void Execute()
-    {
-        int id = AbilityRequestReceiver.instance.GetAbilityId(this);
-        AbilityRequestReceiver.instance.RequestInstantiateRpc(id);
-    }
-}
 
 public interface INetworkAbilityWithInstantiate
 {
     GameObject Prefab { get; }
+}
+
+public interface IUsageUpdate
+{
+    void Update();
 }
 
 public interface IAbility

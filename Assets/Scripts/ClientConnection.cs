@@ -29,6 +29,8 @@ public class ClientConnection : NetworkBehaviour
         {
             enabled = false;
             capsuleCollider.enabled = true;
+            gameObject.tag = "Opponent";
+            gameObject.layer = 6;
             return;
         }
 

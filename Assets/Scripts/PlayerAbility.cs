@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using Unity.Netcode;
-using ImprovedTimers;
 using UnityEngine;
 
-public class PlayerAbility : NetworkBehaviour, IUsingTimer
+public class PlayerAbility : NetworkBehaviour
 {
     [SerializeField] private PlayerAbilityConfig playerAbilityConfig;
     private List<Ability> abilities;
@@ -31,11 +30,6 @@ public class PlayerAbility : NetworkBehaviour, IUsingTimer
         AbilityRequestReceiver.instance.TryExecuteAbility(OwnerClientId, id);
     }
 
-    public void Use(Timer timer) // ??? Завтра доделать обязательно, а то у меня уже плывет мозг
-    {
-        Timer sameTimer = abilities.Find(x => x.CooldownTimer == timer).CooldownTimer;
-    }
-
     public override void OnDestroy()
     {
         base.OnDestroy();
@@ -44,10 +38,4 @@ public class PlayerAbility : NetworkBehaviour, IUsingTimer
         foreach (var ability in abilities)
             ability.OnDestroy();
     }
-}
-
-
-public interface IUsingTimer
-{
-    void Use(Timer timer);
 }

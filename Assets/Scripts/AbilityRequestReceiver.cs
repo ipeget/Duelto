@@ -22,7 +22,7 @@ public class AbilityRequestReceiver : NetworkBehaviour
             Destroy(this);
     }
 
-    public int GetAbilityId(INetworkAbilityWithInstantiate ability)
+    public int GetPrefabId(INetworkAbilityWithInstantiate ability)
     {
         return abilityPrefabSet.GetPrefabId(ability.Prefab);
     }
@@ -63,7 +63,6 @@ public class AbilityRequestReceiver : NetworkBehaviour
         }
 
         ability.Execute();
-        Debug.Log("Execute at" + clientId);
         TimerHandler.instance.StartTimer(clientId, ability.CooldownTimer);
 
         return true;
