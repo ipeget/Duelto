@@ -7,7 +7,8 @@ public class TargetingHandler : NetworkBehaviour
 {
     private List<Client> registeredPlayers = new List<Client>();
 
-    [SerializeField] private LayerMask targetLayer;
+    [SerializeField] private LayerMask hostMask;
+    [SerializeField] private LayerMask clientMask;
 
     public void RegisterPlayer(ulong id, PlayerTargeting player)
     {
@@ -25,7 +26,7 @@ public class TargetingHandler : NetworkBehaviour
         Transform up = dotTarget.Find("Up");
         Transform down = dotTarget.Find("Down");
 
-        if (!player.IsOwner)
+        if (player.IsHost)
         {
             up.gameObject.layer = 6;
             down.gameObject.layer = 6;
@@ -39,7 +40,9 @@ public class TargetingHandler : NetworkBehaviour
     {
         if (!IsServer) return;
 
-        Physics.Raycast(origin, forward, out var hitInfo, distance, targetLayer);
+        int layerMask = NetworkManager.Singleton.SpawnManager.GetPlayerNetworkObject(id).IsOwnedByServer ? clientMask : hostMask;
+
+        Physics.Raycast(origin, forward, out var hitInfo, distance, layerMask);
 
         long targetId = -1;
         int valueIndex = -1;

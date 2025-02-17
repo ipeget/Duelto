@@ -1701,9 +1701,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  targetLayer:
+  hostMask:
     serializedVersion: 2
     m_Bits: 64
+  clientMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &1769761584
 GameObject:
   m_ObjectHideFlags: 0

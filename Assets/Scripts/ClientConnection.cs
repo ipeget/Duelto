@@ -30,10 +30,10 @@ public class ClientConnection : NetworkBehaviour
             enabled = false;
             capsuleCollider.enabled = true;
             gameObject.tag = "Opponent";
-            gameObject.layer = 6;
             return;
         }
 
+        gameObject.layer = 6;
         controller.enabled = true;
 
         foreach (var behaviour in ownerBehaviours)

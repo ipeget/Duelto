@@ -902,7 +902,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2237874399683656393}
   - component: {fileID: 4346699983465814497}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1096,7 +1096,7 @@ GameObject:
   - component: {fileID: 4416926081852918490}
   - component: {fileID: 7311761138334870103}
   - component: {fileID: 2332302468823430825}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: PlayerArmature
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1730,7 +1730,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4516779173509160992}
   - component: {fileID: 5954858157081335305}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
